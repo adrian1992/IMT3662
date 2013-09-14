@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Goog_pop</string>
+    <string name="app_name">Popular Google</string>
     <string name="action_settings">Settings</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="button1">search</string>
     <string name="welcome">Welcome to the popularity contest, introduce your name and surname to see the number of results you have in a single google search</string>
     <string name="title_activity_results">Results</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="restart">Restart</string>
 
 </resources>
