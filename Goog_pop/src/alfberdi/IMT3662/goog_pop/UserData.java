@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class UserData extends Activity {
 
@@ -33,13 +34,18 @@ public class UserData extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Intent change = new Intent(UserData.this, Results.class);
-				Bundle data = new Bundle();			
-				data.putInt(Results.NUM_RESULTS, num_results);
-				data.putString(Results.NAME, name.getText().toString());
-				data.putString(Results.SURNAME, surname.getText().toString());
-				change.putExtras(data);				
-				startActivity(change);
+				if(num_results == -1){
+					Toast.makeText(getBaseContext(), "Error on the internet connection", Toast.LENGTH_LONG).show();
+				}else{
+					Intent change = new Intent(UserData.this, Results.class);
+					Bundle data = new Bundle();
+					data.putInt(Results.NUM_RESULTS, num_results);
+					data.putString(Results.NAME, name.getText().toString());
+					data.putString(Results.SURNAME, surname.getText()
+							.toString());
+					change.putExtras(data);
+					startActivity(change);
+				}
 			}
 		});
 	}

@@ -45,8 +45,6 @@ public class Results extends Activity {
 		dbManager.onCreate(db);
 		try {
 			int old = retrieveInfo(info, db);
-			System.out.print(old);
-			System.out.print(info.getInt(NUM_RESULTS));
 			if (old == -1) {
 				text.setText("First time? your results are: "
 						+ info.getInt(NUM_RESULTS));
@@ -61,13 +59,13 @@ public class Results extends Activity {
 								+ String.valueOf(old)
 								+ " results and now you have: "
 								+ String.valueOf(info.getInt(NUM_RESULTS)));
-						update(info, dbManager);
+						update(info, db);
 					} else {
 						text.setText("It looks like you are not that pouplar any more! You use to have: "
 								+ String.valueOf(old)
 								+ " results and now you have: "
 								+ String.valueOf(info.getInt(NUM_RESULTS)));
-						update(info, dbManager);
+						update(info, db);
 					}
 				}
 			}
@@ -80,9 +78,13 @@ public class Results extends Activity {
 		
 	}
 
-	private void update(Bundle info, DatabaseManager dbManager) {
+	private void update(Bundle info, SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		
+		ContentValues values = new ContentValues();
+		values.put(NAME, info.getString(NAME));
+		values.put(SURNAME, info.getString(SURNAME));
+		values.put(NUM_RESULTS, info.getInt(NUM_RESULTS));
+		db.replace(TABLE_NAME, null, values);
 	}
 
 	@Override
@@ -95,8 +97,7 @@ public class Results extends Activity {
 	private int retrieveInfo(Bundle info, SQLiteDatabase db)throws SQLiteException{
 		String name = info.getString(NAME);
 		String surname = info.getString(SURNAME);
-		final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME + "='"
-				+ name + "' AND " + SURNAME + "='" + surname + "';", null);
+		final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME + "=? AND " + SURNAME + "=?;", new String[]{name,surname});
 		if(cursor.getPosition() == -1){
 			return -1;
 		}
