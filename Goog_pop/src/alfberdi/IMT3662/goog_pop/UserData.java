@@ -35,9 +35,9 @@ public class UserData extends Activity {
 				}
 				Intent change = new Intent(UserData.this, Results.class);
 				Bundle data = new Bundle();			
-				data.putInt("Results", num_results);
-				data.putString("Name", name.getText().toString());
-				data.putString("Surname", surname.getText().toString());
+				data.putInt(Results.NUM_RESULTS, num_results);
+				data.putString(Results.NAME, name.getText().toString());
+				data.putString(Results.SURNAME, surname.getText().toString());
 				change.putExtras(data);				
 				startActivity(change);
 			}
